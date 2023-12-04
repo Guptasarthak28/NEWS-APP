@@ -1,0 +1,78 @@
+This JavaScript code is responsible for fetching and displaying news articles using the NewsAPI service. It interacts with the DOM (Document Object Model) to create and manipulate elements on a webpage. Let's break down the code step by step:
+
+API Key and URL:
+
+javascript
+Copy code
+const API_KEY = "50bc57cf9906419a971039bbdefae640";
+const url = "https://newsapi.org/v2/everything?q=";
+The API key is used for authentication when making requests to the NewsAPI service. The url variable is the base URL for fetching news articles.
+
+Page Load Event Listener:
+
+javascript
+Copy code
+window.addEventListener("load", () => fetchNews("India"));
+When the page loads, it triggers the fetchNews function with the initial query parameter "India". This fetches news articles related to India and populates them on the page.
+
+Reload Function:
+
+javascript
+Copy code
+function reload() {
+    window.location.reload();
+}
+This function is used to reload the webpage when called.
+
+fetchNews Function:
+
+javascript
+Copy code
+async function fetchNews(query) {
+    const res = await fetch(`${url}${query}&apiKey=${API_KEY}`);
+    const data = await res.json();
+    bindData(data.articles);
+}
+This function is responsible for fetching news articles based on the provided query using the NewsAPI. It constructs the URL by appending the query and API key as query parameters. After fetching the data, it calls the bindData function to display the articles.
+
+bindData Function:
+
+javascript
+Copy code
+function bindData(articles) {
+    // ...
+}
+This function takes an array of articles and binds the data to the HTML elements in the DOM to display them. It iterates through each article, creates a clone of a news card template, fills it with data, and appends it to the DOM.
+
+fillDataInCard Function:
+
+javascript
+Copy code
+function fillDataInCard(cardClone, article) {
+    // ...
+}
+This function takes a clone of the news card template and an article object, and it populates the clone with data from the article object. It sets the image, title, description, source, and publication date. Additionally, it adds a click event listener to open the full article URL in a new tab when the card is clicked.
+
+onNavItemClick Function:
+
+javascript
+Copy code
+let curSelectedNav = null;
+function onNavItemClick(id) {
+    // ...
+}
+This function is called when a navigation item is clicked. It fetches news articles based on the selected category (the id passed as an argument), highlights the clicked navigation item, and removes the active class from the previously selected navigation item.
+
+Search Button Event Listener:
+
+javascript
+Copy code
+const searchButton = document.getElementById("search-button");
+const searchText = document.getElementById("search-text");
+
+searchButton.addEventListener("click", () => {
+    // ...
+});
+This event listener is attached to the search button. When the button is clicked, it retrieves the search query from the input field, fetches news articles based on the query, and removes the active class from the currently selected navigation item.
+
+Overall, this code creates an interactive webpage that fetches and displays news articles based on different categories and search queries using the NewsAPI service. It uses JavaScript to manipulate the DOM and present the fetched data to the user in an organized and user-friendly manner.
